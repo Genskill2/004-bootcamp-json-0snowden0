@@ -16,7 +16,9 @@ def compute_phi(journal,event):
 	n0x=0
 	nx1=0
 	nx0=0
-	for i in journal:
+	f=open(journal)
+	data=json.load(f)
+	for i in data:
 		if event in i['events']:
 			if i['squirrel']:
 				n11 += 1
@@ -47,7 +49,7 @@ def compute_correlations(journal):
 	for i in data:
 		for j in i['events']:
 			if j not in corr:
-				phi = compute_phi(data,j)
+				phi = compute_phi(journal,j)
 				corr[j] = phi
 	
 	return corr
